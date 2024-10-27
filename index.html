@@ -1,10 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<style>
+
+    body{
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    section{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        color: grey;
+    }
+
+    .light{
+        height: 75px;
+        width: 200px;
+        border: black solid 2px;
+    }
+
+    button{
+        margin-top: 40px;
+        height: 100px;
+        width: 100px;
+        color: white;
+        background-color: royalblue;
+    }
+
+
+
+</style>
 </head>
 <body>
-$END$
+
+<section id="kitLight">
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+</section>
+
+<section>
+   <button id="start">start</button>
+   <button id="stop">stop</button>
+</section>
+
+
+
+<script src="assest/jquery-3.7.1.min.js"></script>
+<script>
+
+    const light_count=6;
+    let current_light=-1;
+    let direction="RIGHT";
+
+  updateLight = () =>{
+
+      if(direction === "RIGHT") {
+          current_light++;
+
+          $(".light").css("background", "white");
+          $(".light").eq(current_light - 1).css("background", "#F47A84FF");
+          $(".light").eq(current_light).css("background", "red");
+          $(".light").eq(current_light + 1).css("background", "#F6C0DBFF");
+
+          if (current_light === light_count - 1) {
+              direction = "LEFT"
+          }
+
+      }else {
+          current_light--;
+          $(".light").css("background", "white");
+          $(".light").eq(current_light - 1).css("background", "#F47A84FF");
+          $(".light").eq(current_light).css("background", "red");
+          $(".light").eq(current_light + 1).css("background", "#F6C0DBFF");
+
+          if(current_light === 0){
+              direction="RIGHT";
+          }
+
+      }
+  }
+
+    let interval
+
+    $("#start").on('click',function (){
+        interval=setInterval(updateLight,100)
+    })
+
+    $("#stop").on('click',function (){
+        clearInterval(interval)
+    })
+
+
+</script>
 </body>
 </html>
+
